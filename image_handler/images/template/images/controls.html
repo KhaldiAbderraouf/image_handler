@@ -1,0 +1,64 @@
+<style>
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.blue {background-color: #008CBA;} /* Blue */
+.red {background-color: #f44336; border: 2px solid #f44336;} /* Red */
+.gray {background-color: #e7e7e7; color: black;} /* Gray */
+.black {background-color: #555555;} /* Black */
+.red:hover {
+  background-color: white;
+  color: #f44336;
+}
+
+
+</style>
+
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div class="modal-content">
+        <button id="delete-button" class="button red" onclick="sendDelete(event)">delete</button>
+    </div>
+</div>
+
+<script>
+    function sendDelete(event){
+        var xhttp = new XMLHttpRequest();
+        event.preventDefault();
+        xhttp.onreadystatechange = function() { // listen for state changes
+            if (xhttp.readyState == 4 && xhttp.status == 200) { // when completed we can move away
+                window.location.reload();
+            }
+        }
+        xhttp.open("DELETE", this.del_btn.attrs, true);
+        xhttp.send();
+    }
+        // JavaScript function to get cookie by name; retrieved from https://docs.djangoproject.com/en/3.1/ref/csrf/
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+</script>
